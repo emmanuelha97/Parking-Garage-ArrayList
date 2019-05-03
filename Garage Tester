@@ -1,0 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package parking.garage;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import java.io.PrintWriter;
+
+/**
+ *
+ * @author Emmanuel Hernandez
+ */
+public class GarageTest {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws IOException 
+    {
+        // create CD list object
+        ParkingGarage pg6 = new ParkingGarage();
+
+        // create Scanner object associated with the input file
+        Scanner infile = new Scanner(new File("garage.txt"));
+
+        // create output file in default folder
+        PrintWriter toFile = new PrintWriter("Output.txt");
+
+        while (infile.hasNext()) // while more input lines...
+        {
+            // create Scanner object asociated with line
+            String line = infile.nextLine();
+            Scanner lineScan = new Scanner(line);
+
+            String plate = lineScan.next();
+            String action = lineScan.next();
+            Car nextCar = new Car(plate);
+
+            // test for action 
+            if (action.equals("ARRIVE")) 
+            {
+                String out1 = pg6.addCar(nextCar);
+                System.out.println(out1);
+                toFile.println(out1);
+            } else if (action.equals("DEPART")) 
+            {
+                String out2 = pg6.removeCar(plate);
+                System.out.println(out2);
+                toFile.println(out2);
+            }
+        }
+        toFile.close();
+    }
+}
