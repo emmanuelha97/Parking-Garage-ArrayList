@@ -1,0 +1,59 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package parking.garage;
+
+/**
+ *
+ * @author Emmanuel Hernandez
+ */
+public class Car 
+{
+
+    // instance variables
+    private String licensePlate; // Car license plate
+    private int timeMoved; // Times car was moved
+
+    /**
+     * Constructs a Car object
+     *
+     * @param licensePlate plate number
+     */
+    public Car(String licensePlate) 
+    {
+        this.licensePlate = licensePlate;
+        this.timeMoved = 0;
+    }
+
+    /**
+     * Gets the License Plate
+     *
+     * @return the License plate
+     */
+    public String getLicense() 
+    {
+        return licensePlate;
+    }
+
+    /**
+     * Gets the number of times the car moved
+     *
+     * @return times car moved
+     */
+    public int getMoves() 
+    {
+        return timeMoved;
+    }
+
+    /**
+     * Accumulates the number of times the car moved
+     *
+     */
+    public void tempMoves() 
+    {
+        timeMoved++;
+    }
+
+}
