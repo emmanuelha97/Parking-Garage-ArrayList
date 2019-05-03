@@ -1,0 +1,101 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package parking.garage;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Emmanuel Hernandez
+ */
+public class ParkingGarage {
+
+    // Instance Var
+    private ArrayList<Car> garagE;
+    private final int capacity = 10;
+
+    /**
+     * Creates an empty parking garage
+     */
+    public ParkingGarage() 
+    {
+        garagE = new ArrayList<Car>();
+    }
+
+    /**
+     * @param nextCar car parameter
+     * @return adds a car to the parking garage and states whether
+     * the car was parked or if garage full
+     */
+    public String addCar(Car nextCar) 
+    {
+        // add car if not full
+        if (garagE.size() < capacity) 
+        {
+            garagE.add(nextCar);
+            String carParked = nextCar.getLicense()
+                    + " was parked in Parking Garage ";
+            return carParked;
+        } 
+        // dont add car if full 
+        else 
+        {
+            String carNotParked = nextCar.getLicense()
+                    + " was not able to be parked, Parking Garage is full.";
+            return carNotParked;
+        }
+
+    }
+
+    /**
+     * Removes a car and adds amount of times the car was moved
+     * @param nextCar car parameter
+     * @return the car that was removed or if it was not found
+     */
+    public String removeCar(String nextCar) 
+    {
+        int space = garagE.indexOf(nextCar);
+        boolean found = false;
+
+        // for loop to check garage cars inside 
+        for (int i = 0; i < garagE.size(); i++) 
+        {
+            String carInside = garagE.get(i).getLicense();
+            // if car inside then set space to that parking spot
+            if (carInside.equals(nextCar)) 
+            {
+                space = i;
+            }
+        }
+        if (space != garagE.indexOf(nextCar)) 
+        {
+            found = true;
+        }
+        if (found == true) 
+        {
+            //  add moves to cars infront 
+            for (int i = space - 1; i >= 0; i--) 
+            {
+                garagE.get(i).tempMoves();
+            }
+
+            int one = garagE.get(space).getMoves();
+            //removes the car at this space
+            garagE.remove(space);
+
+            //String stating the car being moved & amount of moves
+            String carRemoved = nextCar +
+                    " was moved out of Parking Garage and has moved:" + one;
+            return carRemoved;
+        } 
+        // car was not found inside garage
+        else 
+        {
+            String not = nextCar + " was not found inside Parking Garage";
+            return not;
+        }
+
+    }
+}
